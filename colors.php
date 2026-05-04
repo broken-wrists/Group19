@@ -38,8 +38,8 @@ if (isset($_POST['edit_color'])) {
     $name = trim($_POST['color_name']);
     $hex_value = trim($_POST['hex_value']);
 
-    if (!preg_match("/^#[0-9A-Fa-f]{6}$/", $hex_value)) {
-        $error = "<p class='error'>Error: Hex value must be in the format #RRGGBB.</p>";
+    if ($name == "" || !preg_match("/^#[0-9A-Fa-f]{6}$/", $hex_value)) {
+        $error = "<p class='error'>Error: Invalid Input.</p>";
     } else {
         $name = $conn->real_escape_string($name);
         $hex_value = $conn->real_escape_string($hex_value);
@@ -47,7 +47,7 @@ if (isset($_POST['edit_color'])) {
         $sql = "UPDATE colors SET name='$name', hex_value='$hex_value' WHERE id=$id";
 
         if ($conn->query($sql)) {
-            $sucess = "<p>Color updated successfully.</p>";
+            $success = "<p>Color updated successfully.</p>";
         } else {
             $error = "<p class='error'>Error: Color name or hex value already exists.</p>";
         }

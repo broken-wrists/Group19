@@ -1,8 +1,8 @@
 <?php
 define('DB_HOST', 'helmi');
-define('DB_USER', 'username');
-define('DB_PASS', 'password');
-define('DB_NAME', 'username');
+define('DB_USER', 'annabana');
+define('DB_PASS', 'WelcomeMatGrzmotMine');
+define('DB_NAME', 'annabana');
 
 $conn = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
 
