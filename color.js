@@ -89,6 +89,13 @@ document.addEventListener('DOMContentLoaded', function () {
 				coordinates[selectedColor] = [];
 			}
 
+			for (const c in coordinates) {
+				if (coordinates[c].includes(coordinate)) {
+					coordinates[c] = coordinates[c].filter(coord => coord !== coordinate);
+				}
+			}
+
+
 			if (!coordinates[selectedColor].includes(coordinate)) {
 				coordinates[selectedColor].push(coordinate);
 				coordinates[selectedColor].sort((a, b) => a.localeCompare(b, undefined, { numeric: true }));
