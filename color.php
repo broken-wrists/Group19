@@ -2,7 +2,6 @@
 <html>
 
 <head>
-    <link rel="stylesheet" type="text/css" href="style.css">
     <meta name="author" content="Group 19">
     <meta name="description" content="color page">
     <meta name="keywords" contents="HTML, php, css">
@@ -106,7 +105,6 @@
 
                 // 2.4
                 //using db colors now $colorOptions = array("Red", "Orange", "Yellow", "Green", "Blue", "Purple", "Grey", "Brown", "Black", "Teal");
-                $colorOptions = array_slice($colorOptions, 0, $num_colors);
 
                 //2.1 Adjust style for print page
                 $isPrint = false;
