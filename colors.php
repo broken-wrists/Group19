@@ -29,7 +29,32 @@ if (isset($_POST['add_color'])) {
         }
     }
 }
-//3.3 Delete a color
+
+//3.3 edit color
+$error = "";
+$success = "";
+if (isset($_POST['edit_color'])) {
+    $id = (int)$_POST['id'];
+    $name = trim($_POST['color_name']);
+    $hex_value = trim($_POST['hex_value']);
+
+    if (!preg_match("/^#[0-9A-Fa-f]{6}$/", $hex_value)) {
+        $error = "<p class='error'>Error: Hex value must be in the format #RRGGBB.</p>";
+    } else {
+        $name = $conn->real_escape_string($name);
+        $hex_value = $conn->real_escape_string($hex_value);
+
+        $sql = "UPDATE colors SET name='$name', hex_value='$hex_value' WHERE id=$id";
+
+        if ($conn->query($sql)) {
+            $sucess = "<p>Color updated successfully.</p>";
+        } else {
+            $error = "<p class='error'>Error: Color name or hex value already exists.</p>";
+        }
+    }
+}
+
+//3.4 Delete a color
 if (isset($_POST['confirm_delete'])) {
     $result = $conn->query("SELECT COUNT(*) AS total FROM colors");
     $row = $result->fetch_assoc();
@@ -94,7 +119,32 @@ if (isset($_POST['confirm_delete'])) {
         <div>
             <h3>Edit a Color</h3>
             <hr>
-            <!-- Edit a color functionality goes here -->
+            <form method="POST" action="colors.php">
+                <p>
+                    Select Color:
+                    <select name="id" required>
+                        <option value="">-- Choose a Color --</option>
+                        <?php
+                        $result = $conn->query("SELECT * FROM colors ORDER BY name");
+                        while ($row = $result->fetch_assoc()) {
+                            echo "<option value='{$row['id']}'>{$row['name']}</option>";
+                        }
+                        ?>
+                    </select>
+                </p>
+
+                <p>
+                    New Name:
+                    <input type="text" name="color_name" required>
+                </p>
+
+                <p>
+                    New Hex Value:
+                    <input type="text" name="hex_value" placeholder="#FF0000" required>
+                </p>
+
+                <input type="submit" name="edit_color" value="Update Color">
+            </form>
         </div>
 
         <div>
