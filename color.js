@@ -54,7 +54,7 @@ document.addEventListener('DOMContentLoaded', function () {
 				});
 
 				if (coordinates[oldColor]) {
-                    coordinates[newValue] = coordinates[oldColor];
+                    coordinates[newColor] = coordinates[oldColor];
                     delete coordinates[oldColor];
                 }
 
@@ -78,7 +78,7 @@ document.addEventListener('DOMContentLoaded', function () {
 			const selectedColor = selectedDropdown.value;
 
 			cell.style.backgroundColor = selectedColor.toLowerCase();
-			cell.dataset.paintedColor = selectedColor.toLowerCase();
+			cell.dataset.paintedColor = selectedColor;
 
 			// 1.3 Coordinate Tracking
 			const colCoord = String.fromCharCode(64 + cell.cellIndex);
